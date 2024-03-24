@@ -87,7 +87,7 @@
       <children>
         <Button onAction="#onHelloButtonClick" text="Animate Circle" />
 
-        <ScrollPane AnchorPane.bottomAnchor="0.0" prefHeight="164.0" prefWidth="${AnchorPane.width}" />
+        <ScrollPane fx:id="scrollPane" AnchorPane.bottomAnchor="0.0" prefHeight="164.0" prefWidth="${AnchorPane.width}" />
             <Circle fx:id="circle" fill="DODGERBLUE" layoutX="85.0" layoutY="111.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       </children>
     </AnchorPane>

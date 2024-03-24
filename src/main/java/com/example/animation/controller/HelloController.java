@@ -4,6 +4,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -12,12 +15,30 @@ public class HelloController {
     @FXML
     private Circle circle;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
 
     @FXML
     protected void initialize() {
         makeDraggable();
+
+        // Create a root node for the TreeView
+        TreeItem<String> rootNode = new TreeItem<>("Root");
+
+        // Create sample child nodes
+        TreeItem<String> child1 = new TreeItem<>("Child 1");
+        TreeItem<String> child2 = new TreeItem<>("Child 2");
+
+        // Add child nodes to the root node
+        rootNode.getChildren().addAll(child1, child2);
+
+        // Create the TreeView with the root node
+        TreeView<String> treeView = new TreeView<>(rootNode);
+
+        scrollPane.setContent(treeView);
     }
 
     private void makeDraggable() {
