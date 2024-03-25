@@ -1,5 +1,10 @@
 package com.example.animation.timeline;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -24,10 +29,20 @@ public class StartTimeline {
         contentBox.getChildren().add(treeView); // Add nodes to HBox
         for (int i = 0; i < 30; i ++){
             Button button = new Button();
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    keyframe();
+                }
+            });
             contentBox.getChildren().add(button);
         }
 
         // Create a ScrollPane and set the HBox as its content
         return contentBox;
+    }
+
+    public void keyframe(){
+        System.out.println("ergrg");
     }
 }
