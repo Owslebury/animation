@@ -19,18 +19,21 @@ public class StartTimeline {
         //contentBox.getChildren().add(treeView); // Add nodes to HBox
         for (int i = 0; i < 30; i ++){
             Button button = new Button();
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    keyframe();
-                }
-            });
+            button.setId(String.valueOf(i));
+            button.setOnAction(this::keyframe);
             contentBox.getChildren().add(button);
         }
 
         // Create a ScrollPane and set the HBox as its content
         return contentBox;
     }
+
+    private void keyframe(ActionEvent actionEvent) {
+        Button clickedButton = (Button) actionEvent.getSource();
+        String buttonId = clickedButton.getId();
+        System.out.println("Button ID: " + buttonId);
+    }
+
     public TreeItem<String> initializeLayers(){
         TreeItem<String> rootNode = new TreeItem<>("Root Node");
         rootNode.setExpanded(true); // Optional: Expand root node by default
@@ -44,7 +47,5 @@ public class StartTimeline {
         // Set the root node to the TreeView
         return rootNode;
     }
-    public void keyframe(){
-        System.out.println("ergrg");
-    }
+
 }
