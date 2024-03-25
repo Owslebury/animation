@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         stage.setMaximized(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("animator.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Animation");
         stage.setScene(scene);
         stage.show();
     }
