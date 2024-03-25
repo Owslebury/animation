@@ -4,91 +4,75 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-/**
- *
- * @web http://java-buddy.blogspot.com/
- */
 public class JavaFX_MouseEvent extends Application {
 
-    Label label;
-
     Path path;
+    Rectangle boundingBox;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
 
-    private void scalePath(double scaleFactor) {
-        for (var element : path.getElements()) {
-            if (element instanceof MoveTo) {
-                MoveTo moveTo = (MoveTo) element;
-                moveTo.setX(moveTo.getX() * scaleFactor);
-                moveTo.setY(moveTo.getY() * scaleFactor);
-            } else if (element instanceof LineTo) {
-                LineTo lineTo = (LineTo) element;
-                lineTo.setX(lineTo.getX() * scaleFactor);
-                lineTo.setY(lineTo.getY() * scaleFactor);
-            }
-        }
-    }
-
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("java-buddy.blogspot.com");
+        primaryStage.setTitle("Drawing Application");
         Group root = new Group();
-        Scene scene = new Scene(root, 300, 250);
-
-        label = new Label("Wait mouse");
+        Scene scene = new Scene(root, 800, 600);
 
         path = new Path();
-        path.setStrokeWidth(10);
+        path.setStrokeWidth(2);
         path.setStroke(Color.BLACK);
 
+        boundingBox = new Rectangle();
+        boundingBox.setStroke(Color.RED);
+        boundingBox.setFill(Color.TRANSPARENT);
 
-        scene.setOnMouseClicked(mouseHandler);
-        scene.setOnMouseDragged(mouseHandler);
-        scene.setOnMouseEntered(mouseHandler);
-        scene.setOnMouseExited(mouseHandler);
-        scene.setOnMouseMoved(mouseHandler);
         scene.setOnMousePressed(mouseHandler);
+        scene.setOnMouseDragged(mouseHandler);
         scene.setOnMouseReleased(mouseHandler);
 
-        root.getChildren().add(label);
-        root.getChildren().add(path);
+        root.getChildren().addAll(path, boundingBox);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
+        double minX = Double.MAX_VALUE;
+        double minY = Double.MAX_VALUE;
+        double maxX = Double.MIN_VALUE;
+        double maxY = Double.MIN_VALUE;
 
         @Override
         public void handle(MouseEvent mouseEvent) {
-            label.setText(mouseEvent.getEventType() + "\n"
-                    + "X : Y - " + mouseEvent.getX() + " : " + mouseEvent.getY() + "\n"
-                    + "SceneX : SceneY - " + mouseEvent.getSceneX() + " : " + mouseEvent.getSceneY() + "\n"
-                    + "ScreenX : ScreenY - " + mouseEvent.getScreenX() + " : " + mouseEvent.getScreenY());
-
-            if(mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED){
-                //path.getElements().clear();
-                scalePath(1.5);
+            if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                path.getElements().clear();
+                minX = maxX = mouseEvent.getX();
+                minY = maxY = mouseEvent.getY();
                 path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
-            }else if(mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED){
+            } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                 path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
+                minX = Math.min(minX, mouseEvent.getX());
+                minY = Math.min(minY, mouseEvent.getY());
+                maxX = Math.max(maxX, mouseEvent.getX());
+                maxY = Math.max(maxY, mouseEvent.getY());
+            } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                drawBoundingBox();
             }
-
         }
 
+        private void drawBoundingBox() {
+            boundingBox.setX(minX);
+            boundingBox.setY(minY);
+            boundingBox.setWidth(maxX - minX);
+            boundingBox.setHeight(maxY - minY);
+        }
     };
-
 }

@@ -38,6 +38,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -85,13 +87,21 @@
     </MenuBar>
     <AnchorPane fx:id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
+            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="412.0" layoutY="120.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
         <Button layoutX="495.0" layoutY="41.0" onAction="#onHelloButtonClick" text="Animate Circle" />
 
                           <ScrollPane fx:id="scrollPane" prefHeight="164.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="412.0" layoutY="120.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-            <VBox prefHeight="891.0" prefWidth="204.0" style="-fx-background-color: #C0C0C0;" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="76.0" prefWidth="80.0">
+                     <graphic>
+                       <ImageView fitHeight="63.0" fitWidth="63.0">
+                         <image>
+                           <Image url="@pencil.png" />
+                         </image>
+                       </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" prefHeight="76.0" prefWidth="80.0" />
                </children>
             </VBox>
       </children>
