@@ -11,6 +11,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -21,6 +22,9 @@ public class HelloController {
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private TreeView<String> layers;
+
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
 
@@ -30,7 +34,7 @@ public class HelloController {
         StartTimeline start = new StartTimeline();
        HBox contentBox = start.startTimeline();
         scrollPane.setContent(contentBox);
-
+        layers.setRoot(start.initializeLayers());
     }
 
     private void makeDraggable() {
