@@ -9,4 +9,6 @@ module com.example.animation {
     exports com.example.animation;
     exports com.example.animation.controller;
     opens com.example.animation.controller to javafx.fxml;
+    exports com.example.animation.object;
+    opens com.example.animation.object to javafx.fxml;
 }

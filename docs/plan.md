@@ -29,3 +29,5 @@ Objects are the things that can be moved around. They can be connected to other 
 I would like ctrl z to be in my program. This will mean I will need to revert the changes that have been made, involving representing the transformation (i.e., scale, position, etc.) and the graphic changes such as a line stroke or a fill.
 
 I think it would be best to
+
+The FXML file needs to be split into different controller files so that the methods can be clearly seperated. 

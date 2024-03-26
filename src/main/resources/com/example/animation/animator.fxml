@@ -95,7 +95,7 @@
             <VBox prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ColorPicker prefHeight="29.0" prefWidth="271.0" />
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+                  <Button fx:id = "selectButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="38.0">
                            <image>
@@ -104,7 +104,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+                  <Button fx:id = "editButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
                      <graphic>
                        <ImageView fitHeight="38.0" fitWidth="38.0">
                          <image>
@@ -112,7 +112,7 @@
                          </image>
                        </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+                  <Button fx:id = "fillButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="39.0">
                            <image>
@@ -121,7 +121,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+                  <Button fx:id = "scaleButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="38.0">
                            <image>

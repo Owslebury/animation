@@ -18,12 +18,18 @@ import javafx.util.Duration;
 public class HelloController {
     @FXML
     private Circle circle;
-
     @FXML
     private ScrollPane scrollPane;
-
     @FXML
     private TreeView<String> layers;
+    @FXML
+    private Button selectButton;
+    @FXML
+    private Button editButton;
+    @FXML
+    private Button fillButton;
+    @FXML
+    private Button scaleButton;
 
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
