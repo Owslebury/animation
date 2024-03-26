@@ -1,21 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
-<VBox prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.animation.toolbox.ToolboxController">
-    <children>
-        <ColorPicker prefHeight="29.0" prefWidth="271.0" />
-        <Button fx:id="selectButton" onAction="#handleSelectAction" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
-            <!-- Button graphic if needed -->
-        </Button>
-        <Button fx:id="editButton" onAction="#handleEditAction" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
-            <!-- Button graphic if needed -->
-        </Button>
-        <Button fx:id="fillButton" onAction="#handleFillAction" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
-            <!-- Button graphic if needed -->
-        </Button>
-        <Button fx:id="scaleButton" onAction="#handleScaleAction" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
-            <!-- Button graphic if needed -->
-        </Button>
-    </children>
+
+<VBox fx:id="toolbox" fillWidth="false" prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.animation.toolbox.ToolboxController">
+   <children>
+      <ColorPicker prefHeight="29.0" prefWidth="271.0" />
+      <Button fx:id="editButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0" onAction="#edit">
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="38.0">
+               <image>
+                  <Image url="@pencil.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="fillButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="39.0">
+               <image>
+                  <Image url="@colors_FILL0_wght700_GRAD200_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="scaleButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="38.0">
+               <image>
+                  <Image url="@fit_screen_FILL0_wght700_GRAD200_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="selectButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0">
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="38.0">
+               <image>
+                  <Image url="@select.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
 </VBox>

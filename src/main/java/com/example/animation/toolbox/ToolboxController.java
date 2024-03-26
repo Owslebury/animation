@@ -1,17 +1,36 @@
 package com.example.animation.toolbox;
 
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 
 public class ToolboxController {
-    public void handleSelectAction(ActionEvent actionEvent) {
+
+    @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
+    private Button editButton;
+
+    @FXML
+    private Button fillButton;
+
+    @FXML
+    private Button scaleButton;
+
+    @FXML
+    private Button selectButton;
+
+    @FXML
+    public void initialize() {
+        // Initialization code, if needed
     }
 
-    public void handleEditAction(ActionEvent actionEvent) {
+    @FXML
+    private void edit() {
+        // Handle edit button action
+        System.out.println("Edit button clicked");
     }
 
-    public void handleFillAction(ActionEvent actionEvent) {
-    }
-
-    public void handleScaleAction(ActionEvent actionEvent) {
-    }
+    // Add more methods as needed for other button actions or event handlers
 }
