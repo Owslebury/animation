@@ -7,11 +7,9 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -62,6 +60,11 @@ public class HelloController {
         });
     }
 
+    private void disableDraggable() {
+        circle.setOnMousePressed(null);
+        circle.setOnMouseDragged(null);
+    }
+
     @FXML
     protected void onHelloButtonClick() {
         // Create a timeline for animation
@@ -84,4 +87,5 @@ public class HelloController {
         timeline.setAutoReverse(true); // Reverse animation on reaching the end
         timeline.play();
     }
+
 }
