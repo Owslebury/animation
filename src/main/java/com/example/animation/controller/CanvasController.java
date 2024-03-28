@@ -1,5 +1,6 @@
 package com.example.animation.controller;
 
+import com.example.animation.toolbox.Draw;
 import com.example.animation.toolbox.ToolboxController;
 import com.example.animation.toolbox.data.ToolData;
 import com.example.animation.toolbox.data.Toolmode;
@@ -8,17 +9,15 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class CanvasController {
-    private ToolboxController toolboxController;
-
-    public void setToolboxController(ToolboxController toolboxController) {
-        this.toolboxController = toolboxController;
-    }
-
+    @FXML
+    private Pane canvasContainer;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
     @FXML
@@ -71,7 +70,6 @@ public class CanvasController {
     }
 
     public void initialize(){
-        makeDraggable();
         ToolData.getInstance().toolmodeProperty().addListener(this::handleToolmodeChange);
     }
 
@@ -82,5 +80,12 @@ public class CanvasController {
         else{
             disableDraggable();
         }
+        if (ToolData.getInstance().getToolmode() == Toolmode.DRAW){
+            enableDrawing();
+        }
+    }
+
+    private void enableDrawing(){
+        Draw draw = new Draw(canvasContainer);
     }
 }
