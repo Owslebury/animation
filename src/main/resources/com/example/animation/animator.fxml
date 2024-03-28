@@ -43,11 +43,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.animation.controller.HelloController">
   <children>
-    <MenuBar prefHeight="0.0" prefWidth="818.0" VBox.vgrow="NEVER">
+    <MenuBar prefHeight="0.0" prefWidth="818.0">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -86,11 +85,10 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="687.0" prefWidth="810.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="518.0" prefWidth="853.0" VBox.vgrow="ALWAYS">
       <children>
+            <fx:include layoutX="253.0" source="canvas.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id = "canvas"/>
             <fx:include source="toolbox.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <fx:include layoutX="253.0" source="canvas.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="415.0" layoutY="252.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
 
                           <ScrollPane fx:id="scrollPane" layoutX="252.0" prefHeight="164.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="0.0" />
             <TreeView fx:id="layers" layoutY="420.0" prefHeight="164.0" prefWidth="253.0" AnchorPane.bottomAnchor="0.0" />

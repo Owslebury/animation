@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="toolbox" fillWidth="false" prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.animation.toolbox.ToolboxController">
+<VBox fx:id="toolboxContainer" fillWidth="false" prefHeight="891.0" prefWidth="253.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.animation.toolbox.ToolboxController">
    <children>
       <ColorPicker prefHeight="29.0" prefWidth="271.0" />
       <Button fx:id="selectButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="51.0" onAction="#select">

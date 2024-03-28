@@ -1,13 +1,21 @@
 package com.example.animation.toolbox;
 
+import com.example.animation.controller.CanvasController;
+import com.example.animation.toolbox.data.ToolData;
+import com.example.animation.toolbox.data.Toolmode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class ToolboxController {
+    private CanvasController canvasController;
 
     @FXML
     private Button editButton;
+
+    public void setCanvasController(CanvasController canvasController) {
+        this.canvasController = canvasController;
+    }
 
     @FXML
     private Button fillButton;
@@ -42,20 +50,24 @@ public class ToolboxController {
     @FXML
     private void edit() {
         handleButtonAction(editButton);
+        ToolData.getInstance().setToolmode(Toolmode.DRAW);
     }
 
     @FXML
     private void fill() {
         handleButtonAction(fillButton);
+        ToolData.getInstance().setToolmode(Toolmode.FILL);
     }
 
     @FXML
     private void scale() {
         handleButtonAction(scaleButton);
+        ToolData.getInstance().setToolmode(Toolmode.SCALE);
     }
 
     @FXML
     private void select() {
         handleButtonAction(selectButton);
+        ToolData.getInstance().setToolmode(Toolmode.SELECT);
     }
 }

@@ -26,6 +26,7 @@ public class RubberBandSelection extends Application {
 
         // Event handlers
         scene.setOnMousePressed(event -> {
+            selectionBox.setStroke(Color.BLUE);
             startX = event.getX();
             startY = event.getY();
             selectionBox.setX(startX);
@@ -48,6 +49,7 @@ public class RubberBandSelection extends Application {
         scene.setOnMouseReleased(event -> {
             // Add logic here to handle selection
             System.out.println("Selected items within the box!");
+            selectionBox.setStroke(Color.TRANSPARENT);
         });
 
         primaryStage.setTitle("Rubber Band Selection");

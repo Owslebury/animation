@@ -14,4 +14,6 @@ module com.example.animation {
     // Export the toolbox package to javafx.fxml
     exports com.example.animation.toolbox;
     opens com.example.animation.toolbox to javafx.fxml;
+    exports com.example.animation.toolbox.data;
+    opens com.example.animation.toolbox.data to javafx.fxml;
 }
