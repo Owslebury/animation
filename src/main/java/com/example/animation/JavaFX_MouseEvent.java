@@ -8,14 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JavaFX_MouseEvent extends Application {
 
     Path path;
+    List<Path> enclosedPaths = new ArrayList<>();
     double translateX = 0;
     double translateY = 0;
 
@@ -35,16 +37,17 @@ public class JavaFX_MouseEvent extends Application {
 
         scene.setOnMousePressed(mousePressedHandler);
         scene.setOnMouseDragged(mouseDraggedHandler);
+        scene.setOnMouseReleased(mouseReleasedHandler);
 
         Button btnUp = new Button("Up");
         Button btnDown = new Button("Down");
         Button btnLeft = new Button("Left");
         Button btnRight = new Button("Right");
 
-        btnUp.setOnAction(e -> movePath(0, -10)); // Move up (negative translateY)
-        btnDown.setOnAction(e -> movePath(0, 10)); // Move down (positive translateY)
-        btnLeft.setOnAction(e -> movePath(-10, 0)); // Move left (negative translateX)
-        btnRight.setOnAction(e -> movePath(10, 0)); // Move right (positive translateX)
+        btnUp.setOnAction(e -> movePath(0, -10));
+        btnDown.setOnAction(e -> movePath(0, 10));
+        btnLeft.setOnAction(e -> movePath(-10, 0));
+        btnRight.setOnAction(e -> movePath(10, 0));
 
         HBox buttonBox = new HBox(10, btnUp, btnDown, btnLeft, btnRight);
         buttonBox.setLayoutX(10);
@@ -55,33 +58,42 @@ public class JavaFX_MouseEvent extends Application {
         primaryStage.show();
     }
 
-    EventHandler<MouseEvent> mousePressedHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent mouseEvent) {
-            path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
-        }
+    EventHandler<MouseEvent> mousePressedHandler = mouseEvent -> {
+        path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
     };
 
-    EventHandler<MouseEvent> mouseDraggedHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent mouseEvent) {
-            path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
-        }
+    EventHandler<MouseEvent> mouseDraggedHandler = mouseEvent -> {
+        path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
+    };
+
+    EventHandler<MouseEvent> mouseReleasedHandler = mouseEvent -> {
+        // Create a new Path for enclosed spaces and fill them with color
+        Path enclosedPath = new Path();
+        enclosedPath.setFill(Color.BLUE); // Change color as needed
+        enclosedPath.getElements().addAll(path.getElements());
+        enclosedPaths.add(enclosedPath);
+        Group root = (Group) path.getParent();
+        root.getChildren().add(enclosedPath);
+
+        // Clear the current path to start a new drawing
+        path.getElements().clear();
     };
 
     private void movePath(double deltaX, double deltaY) {
         translateX += deltaX;
         translateY += deltaY;
 
-        for (int i = 0; i < path.getElements().size(); i++) {
-            if (path.getElements().get(i) instanceof MoveTo) {
-                MoveTo move = (MoveTo) path.getElements().get(i);
-                move.setX(move.getX() + deltaX);
-                move.setY(move.getY() + deltaY);
-            } else if (path.getElements().get(i) instanceof LineTo) {
-                LineTo line = (LineTo) path.getElements().get(i);
-                line.setX(line.getX() + deltaX);
-                line.setY(line.getY() + deltaY);
+        for (Path enclosedPath : enclosedPaths) {
+            for (PathElement pathElement : enclosedPath.getElements()) {
+                if (pathElement instanceof MoveTo) {
+                    MoveTo move = (MoveTo) pathElement;
+                    move.setX(move.getX() + deltaX);
+                    move.setY(move.getY() + deltaY);
+                } else if (pathElement instanceof LineTo) {
+                    LineTo line = (LineTo) pathElement;
+                    line.setX(line.getX() + deltaX);
+                    line.setY(line.getY() + deltaY);
+                }
             }
         }
     }
