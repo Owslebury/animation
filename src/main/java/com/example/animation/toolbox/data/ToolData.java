@@ -9,7 +9,7 @@ public class ToolData {
     private ObjectProperty<Toolmode> toolmodeProperty;
 
     private ToolData() {
-        toolmodeProperty = new SimpleObjectProperty<>(Toolmode.SELECT);
+        toolmodeProperty = new SimpleObjectProperty<>(Toolmode.NONE);
     }
 
     public void setToolmode(Toolmode toolmode) {

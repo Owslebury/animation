@@ -20,6 +20,8 @@ public class CanvasController {
     private Pane canvasContainer;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
+
+    private Draw draw;
     @FXML
     private Circle circle;
     private void makeDraggable() {
@@ -83,9 +85,19 @@ public class CanvasController {
         if (ToolData.getInstance().getToolmode() == Toolmode.DRAW){
             enableDrawing();
         }
+        else{
+            disableDrawing();
+        }
     }
 
     private void enableDrawing(){
         Draw draw = new Draw(canvasContainer);
+        this.draw = draw;
+    }
+
+    private void disableDrawing(){
+        if (draw != null){
+            draw.disableDrawing();
+        }
     }
 }

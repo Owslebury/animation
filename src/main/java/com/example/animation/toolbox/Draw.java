@@ -36,4 +36,9 @@ public class Draw {
     EventHandler<MouseEvent> mouseDraggedHandler = mouseEvent -> {
         path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
     };
-}
+
+    public void disableDrawing() {
+        canvas.setOnMousePressed(null);
+        canvas.setOnMouseDragged(null);
+    }
+    }

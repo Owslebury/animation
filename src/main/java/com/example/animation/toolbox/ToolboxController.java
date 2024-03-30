@@ -41,6 +41,7 @@ public class ToolboxController {
         if (button.getStyle().contains("goldenrod")) {
             button.setStyle("");
             lastPressedButton = null;
+            ToolData.getInstance().setToolmode(Toolmode.NONE);
         } else {
             button.setStyle("-fx-background-color: goldenrod;");
             lastPressedButton = button;
