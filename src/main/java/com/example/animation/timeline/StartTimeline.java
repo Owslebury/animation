@@ -34,18 +34,5 @@ public class StartTimeline {
         System.out.println("Button ID: " + buttonId);
     }
 
-    public TreeItem<String> initializeLayers(){
-        TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        rootNode.setExpanded(true); // Optional: Expand root node by default
-
-        TreeItem<String> childNode1 = new TreeItem<>("Child Node 1");
-        TreeItem<String> childNode2 = new TreeItem<>("Child Node 2");
-
-        // Add children nodes to the root node
-        rootNode.getChildren().addAll(childNode1, childNode2);
-
-        // Set the root node to the TreeView
-        return rootNode;
-    }
 
 }

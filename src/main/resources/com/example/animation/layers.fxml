@@ -19,7 +19,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addLayerButton" layoutX="149.0" layoutY="117.0" mnemonicParsing="false" onAction="#addLayer" prefHeight="47.0" prefWidth="51.0">
+      <Button fx:id="addLayerButton" layoutX="149.0" layoutY="117.0" mnemonicParsing="false" onAction="#addGroup" prefHeight="47.0" prefWidth="51.0">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
