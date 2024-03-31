@@ -11,8 +11,7 @@ public class MainController {
 
     @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private TreeView<String> layers;
+
     @FXML
     private Button selectButton;
     @FXML
@@ -28,7 +27,7 @@ public class MainController {
         StartTimeline start = new StartTimeline();
         HBox contentBox = start.startTimeline();
         scrollPane.setContent(contentBox);
-        layers.setRoot(start.initializeLayers());
+
     }
 
 
