@@ -1,5 +1,7 @@
 package com.example.animation.controller;
 
+import com.example.animation.Layer;
+import com.example.animation.data.LayersData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
@@ -14,7 +16,7 @@ import java.util.Optional;
 public class LayersController {
     @FXML
     private TreeView<String> layers;
-    private TreeItem<String> selectedNode;
+    private TreeItem<String> selectedLayer;
 
     @FXML
     protected void initialize() {
@@ -22,7 +24,7 @@ public class LayersController {
         TreeItem<String> root = new TreeItem<>("Layers");
         root.setExpanded(true);
         layers.setRoot(root);
-        selectedNode = root; // Set the dummy root as the root of the TreeView
+        selectedLayer = root;
 
         // Create context menu items
         MenuItem renameItem = new MenuItem("Rename");
@@ -45,16 +47,9 @@ public class LayersController {
                 }
             }
         });
-
-        layers.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                handleRename();
-            }
-        });
-
         layers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                selectedNode = newValue;
+                selectedLayer = newValue;
                 System.out.println("Selected Node: " + newValue.getValue());
                 // Add any additional actions or logic here based on the selected node
             }
@@ -62,19 +57,28 @@ public class LayersController {
     }
 
     private void handleRename() {
-        TextInputDialog dialog = new TextInputDialog(selectedNode.getValue());
+        TextInputDialog dialog = new TextInputDialog(selectedLayer.getValue());
         dialog.setTitle("Rename Node");
         dialog.setHeaderText("Enter new name:");
         dialog.setContentText("New Name:");
 
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(name -> selectedNode.setValue(name));
+        result.ifPresent(name -> selectedLayer.setValue(name));
     }
 
     @FXML
     public void addLayer(ActionEvent actionEvent) {
         // Example of adding a new group
-        TreeItem<String> newGroup = new TreeItem<>("New Layer");
-        selectedNode.getChildren().add(newGroup);
+        TreeItem<String> newLayer = new TreeItem<>("New Layer");
+        selectedLayer.getChildren().add(newLayer);
+        Layer layer = new Layer(newLayer);
+        if (isChildOfRoot(newLayer)){
+            LayersData.getInstance().addLayer(layer);
+        }
+    }
+
+    private boolean isChildOfRoot(TreeItem<String> item) {
+        TreeItem<String> parent = item.getParent();
+        return parent != null && parent == layers.getRoot();
     }
 }

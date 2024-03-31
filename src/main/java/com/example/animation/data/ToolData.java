@@ -1,6 +1,6 @@
-package com.example.animation.toolbox.data;
+package com.example.animation.data;
 
-import com.example.animation.toolbox.data.Toolmode;
+import com.example.animation.toolbox.Toolmode;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 

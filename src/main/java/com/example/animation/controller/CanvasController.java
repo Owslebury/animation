@@ -1,15 +1,13 @@
 package com.example.animation.controller;
 
 import com.example.animation.toolbox.Draw;
-import com.example.animation.toolbox.ToolboxController;
-import com.example.animation.toolbox.data.ToolData;
-import com.example.animation.toolbox.data.Toolmode;
+import com.example.animation.data.ToolData;
+import com.example.animation.toolbox.Toolmode;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;

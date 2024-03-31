@@ -1,4 +1,4 @@
-package com.example.animation.toolbox.data;
+package com.example.animation.toolbox;
 
 public enum Toolmode {
     SELECT, SCALE, FILL, DRAW, NONE

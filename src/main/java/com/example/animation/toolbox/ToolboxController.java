@@ -1,11 +1,9 @@
 package com.example.animation.toolbox;
 
 import com.example.animation.controller.CanvasController;
-import com.example.animation.toolbox.data.ToolData;
-import com.example.animation.toolbox.data.Toolmode;
+import com.example.animation.data.ToolData;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 
 public class ToolboxController {
     private CanvasController canvasController;

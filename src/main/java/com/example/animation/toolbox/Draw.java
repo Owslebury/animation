@@ -1,5 +1,6 @@
 package com.example.animation.toolbox;
 
+import com.example.animation.data.LayersData;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
