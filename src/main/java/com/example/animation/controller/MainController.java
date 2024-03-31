@@ -1,6 +1,7 @@
 package com.example.animation.controller;
 
 import com.example.animation.timeline.StartTimeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -29,7 +30,4 @@ public class MainController {
         scrollPane.setContent(contentBox);
 
     }
-
-
-
 }
