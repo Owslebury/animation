@@ -3,8 +3,9 @@ package com.example.animation.toolbox;
 import com.example.animation.controller.LayersController;
 import com.example.animation.data.LayersData;
 import com.example.animation.data.ToolData;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,29 +26,42 @@ public class Draw {
         path = new Path();
         path.setStrokeWidth(2);
         path.setStroke(Color.BLACK);
-        if (LayersData.getInstance().isSelectedChildOfRoot()){
-            LayersData.getInstance().getCurrentLayer().setGraphic(path);
-            canvas.getChildren().add(LayersData.getInstance().getCurrentLayer().getGraphic());
-        }
-         // Add path to the canvas Pane
-        if (ToolData.getInstance().getToolmode() == Toolmode.SELECT){
 
-        }
+        LayersData.getInstance().getRootLayer().addListener((observable) -> {
+            updateDrawing();
+        });
+
+        updateDrawing();
+
         // Set mouse event handlers
         canvas.setOnMousePressed(mousePressedHandler);
         canvas.setOnMouseDragged(mouseDraggedHandler);
     }
 
+    private void updateDrawing() {
+        if (LayersData.getInstance().isSelectedChildOfRoot()) {
+            LayersData.getInstance().getCurrentLayer().setGraphic(path);
+            canvas.getChildren().add(LayersData.getInstance().getCurrentLayer().getGraphic());
+        } else {
+            canvas.getChildren().remove(path);
+            LayersData.getInstance().getCurrentLayer().setGraphic(null);
+        }
+    }
+
     EventHandler<MouseEvent> mousePressedHandler = mouseEvent -> {
-        path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
+        if (LayersData.getInstance().isSelectedChildOfRoot()) {
+            path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
+        }
     };
 
     EventHandler<MouseEvent> mouseDraggedHandler = mouseEvent -> {
-        path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
+        if (LayersData.getInstance().isSelectedChildOfRoot()) {
+            path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
+        }
     };
 
     public void disableDrawing() {
         canvas.setOnMousePressed(null);
         canvas.setOnMouseDragged(null);
     }
-    }
+}
