@@ -1,6 +1,8 @@
 package com.example.animation.toolbox;
 
+import com.example.animation.controller.LayersController;
 import com.example.animation.data.LayersData;
+import com.example.animation.data.ToolData;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +25,14 @@ public class Draw {
         path = new Path();
         path.setStrokeWidth(2);
         path.setStroke(Color.BLACK);
-        canvas.getChildren().add(path); // Add path to the canvas Pane
+        if (LayersData.getInstance().isSelectedChildOfRoot()){
+            LayersData.getInstance().getCurrentLayer().setGraphic(path);
+            canvas.getChildren().add(LayersData.getInstance().getCurrentLayer().getGraphic());
+        }
+         // Add path to the canvas Pane
+        if (ToolData.getInstance().getToolmode() == Toolmode.SELECT){
 
+        }
         // Set mouse event handlers
         canvas.setOnMousePressed(mousePressedHandler);
         canvas.setOnMouseDragged(mouseDraggedHandler);

@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Layer {
-    private TreeItem<String> selectedLayer;
+    private TreeItem<String> treeItem;
     private Path graphic;
 
-    public Layer(TreeItem<String> selectedLayer) {
-        this.selectedLayer = selectedLayer;
+    public Layer(TreeItem<String> treeItem) {
+        this.treeItem = treeItem;
     }
 
     private List<Layer> children = new ArrayList<>();
 
-    public TreeItem<String> getSelectedLayer() {
-        return selectedLayer;
+    public TreeItem<String> getTreeItem() {
+        return treeItem;
     }
 
-    public void setSelectedLayer(TreeItem<String> selectedLayer) {
-        this.selectedLayer = selectedLayer;
+    public void setTreeItem(TreeItem<String> selectedLayer) {
+        this.treeItem = selectedLayer;
     }
 
     public Path getGraphic() {

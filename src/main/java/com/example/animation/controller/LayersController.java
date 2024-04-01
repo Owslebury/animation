@@ -24,6 +24,9 @@ public class LayersController {
         TreeItem<String> root = new TreeItem<>("Layers");
         root.setExpanded(true);
         layers.setRoot(root);
+        Layer layer = new Layer(root);
+        LayersData.getInstance().setCurrentLayer(layer);
+        LayersData.getInstance().setRootLayer(layer);
         selectedLayer = root;
 
         // Create context menu items
@@ -51,6 +54,8 @@ public class LayersController {
             if (newValue != null) {
                 selectedLayer = newValue;
                 System.out.println("Selected Node: " + newValue.getValue());
+                Layer newCurrentLayer = new Layer(selectedLayer);
+                LayersData.getInstance().setCurrentLayer(newCurrentLayer);
                 // Add any additional actions or logic here based on the selected node
             }
         });
@@ -77,7 +82,7 @@ public class LayersController {
         }
     }
 
-    private boolean isChildOfRoot(TreeItem<String> item) {
+    public boolean isChildOfRoot(TreeItem<String> item) {
         TreeItem<String> parent = item.getParent();
         return parent != null && parent == layers.getRoot();
     }
