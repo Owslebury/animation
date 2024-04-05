@@ -9,7 +9,13 @@ import java.util.List;
 public class LayersData {
     private static LayersData instance;
     private Layer rootLayer;
-    private Layer currentLayer;
+    public Layer currentLayer;
+
+    private List<CurrentLayerChangeListener> listeners;
+
+    private LayersData() {
+        listeners = new ArrayList<>(); // Initialize the listeners list here
+    }
 
     public Layer getCurrentLayer() {
         return currentLayer;
@@ -17,7 +23,7 @@ public class LayersData {
 
     public void setCurrentLayer(Layer currentLayer) {
         this.currentLayer = currentLayer;
-        System.out.println("Selected layer changed");
+        notifyListeners(currentLayer); // Notify listeners about the change
     }
 
     private List<Layer> rootLayers = new ArrayList<>();
@@ -49,6 +55,20 @@ public class LayersData {
         }
         else{
             return true;
+        }
+    }
+
+    public void addCurrentLayerChangeListener(CurrentLayerChangeListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeCurrentLayerChangeListener(CurrentLayerChangeListener listener) {
+        listeners.remove(listener);
+    }
+
+    private void notifyListeners(Layer newLayer) {
+        for (CurrentLayerChangeListener listener : listeners) {
+            listener.onCurrentLayerChanged(newLayer);
         }
     }
 

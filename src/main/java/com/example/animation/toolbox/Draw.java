@@ -1,6 +1,8 @@
 package com.example.animation.toolbox;
 
+import com.example.animation.Layer;
 import com.example.animation.controller.LayersController;
+import com.example.animation.data.CurrentLayerChangeListener;
 import com.example.animation.data.LayersData;
 import com.example.animation.data.ToolData;
 import javafx.beans.InvalidationListener;
@@ -13,7 +15,7 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
-public class Draw {
+public class Draw implements CurrentLayerChangeListener {
     private Path path;
     private Pane canvas;
 
@@ -27,9 +29,7 @@ public class Draw {
         path.setStrokeWidth(2);
         path.setStroke(Color.BLACK);
 
-        LayersData.getInstance().getRootLayer().addListener((observable) -> {
-            updateDrawing();
-        });
+        LayersData.getInstance().addCurrentLayerChangeListener(this);
 
         updateDrawing();
 
@@ -63,5 +63,10 @@ public class Draw {
     public void disableDrawing() {
         canvas.setOnMousePressed(null);
         canvas.setOnMouseDragged(null);
+    }
+
+    @Override
+    public void onCurrentLayerChanged(Layer newLayer) {
+        updateDrawing();
     }
 }

@@ -53,7 +53,6 @@ public class LayersController {
         layers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedLayer = newValue;
-                System.out.println("Selected Node: " + newValue.getValue());
                 Layer newCurrentLayer = new Layer(selectedLayer);
                 LayersData.getInstance().setCurrentLayer(newCurrentLayer);
                 // Add any additional actions or logic here based on the selected node
