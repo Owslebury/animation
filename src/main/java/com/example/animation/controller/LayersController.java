@@ -1,15 +1,12 @@
 package com.example.animation.controller;
 
 import com.example.animation.Layer;
+import com.example.animation.data.CanvasData;
 import com.example.animation.data.LayersData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.TreeCell;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 import java.util.Optional;
 
@@ -32,10 +29,12 @@ public class LayersController {
         // Create context menu items
         MenuItem renameItem = new MenuItem("Rename");
         renameItem.setOnAction(event -> handleRename());
-
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction(event -> handleDelete());
         // Create context menu and add items
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.getItems().add(renameItem);
+        contextMenu.getItems().add(deleteItem);
 
         layers.setCellFactory(treeView -> new TreeCell<String>() {
             @Override
@@ -68,6 +67,26 @@ public class LayersController {
 
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(name -> selectedLayer.setValue(name));
+    }
+
+    private void handleDelete() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Layer");
+        alert.setHeaderText("Are you sure you want to delete this layer?");
+        alert.setContentText("This action cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            TreeItem<String> parent = selectedLayer.getParent();
+            //Remove graphics from the canvas
+            Pane canvas = CanvasData.getInstance().getCanvas();
+            canvas.getChildren().remove(LayersData.getInstance().getCurrentLayer().getGraphic());
+            CanvasData.getInstance().setCanvas(canvas);
+            if (parent != null) {
+                parent.getChildren().remove(selectedLayer);
+            }
+        }
+        System.out.println("DELETE CANVAS");
     }
 
     @FXML

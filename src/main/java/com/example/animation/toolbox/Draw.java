@@ -67,6 +67,9 @@ public class Draw implements CurrentLayerChangeListener {
 
     @Override
     public void onCurrentLayerChanged(Layer newLayer) {
+        path = new Path();
+        path.setStrokeWidth(2);
+        path.setStroke(Color.BLACK);
         updateDrawing();
     }
 }

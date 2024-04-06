@@ -1,5 +1,6 @@
 package com.example.animation.controller;
 
+import com.example.animation.data.CanvasData;
 import com.example.animation.toolbox.Draw;
 import com.example.animation.data.ToolData;
 import com.example.animation.toolbox.Toolmode;
@@ -71,6 +72,14 @@ public class CanvasController {
 
     public void initialize(){
         ToolData.getInstance().toolmodeProperty().addListener(this::handleToolmodeChange);
+        CanvasData.getInstance().canvasProperty().addListener(this::handleCanvasChange);
+        CanvasData.getInstance().setCanvas(canvasContainer);
+    }
+
+    private void handleCanvasChange(Observable observable) {
+        System.out.println("UPDATE CANVAS");
+        Pane newCanvas = CanvasData.getInstance().getCanvas();
+        canvasContainer = newCanvas;
     }
 
     private void handleToolmodeChange(Observable observable) {
