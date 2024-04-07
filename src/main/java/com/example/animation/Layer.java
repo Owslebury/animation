@@ -16,9 +16,15 @@ public class Layer implements ObservableValue<Layer> {
     private Path graphic;
     private List<Layer> children = new ArrayList<>();
     private ObjectProperty<Layer> observableLayer = new SimpleObjectProperty<>(this);
+    private Integer layerNumber;
 
-    public Layer(TreeItem<String> treeItem) {
+    public Integer getLayerNumber() {
+        return layerNumber;
+    }
+
+    public Layer(TreeItem<String> treeItem, Integer layerNumber) {
         this.treeItem = treeItem;
+        this.layerNumber = layerNumber;
     }
 
     public TreeItem<String> getTreeItem() {

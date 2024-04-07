@@ -43,8 +43,7 @@ public class Draw implements CurrentLayerChangeListener {
             LayersData.getInstance().getCurrentLayer().setGraphic(path);
             canvas.getChildren().add(LayersData.getInstance().getCurrentLayer().getGraphic());
         } else {
-            canvas.getChildren().remove(path);
-            LayersData.getInstance().getCurrentLayer().setGraphic(null);
+            //canvas.getChildren().remove(path);
         }
     }
 

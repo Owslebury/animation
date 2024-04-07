@@ -14,14 +14,13 @@ public class LayersController {
     @FXML
     private TreeView<String> layers;
     private TreeItem<String> selectedLayer;
-
     @FXML
     protected void initialize() {
         // Create a dummy root node
         TreeItem<String> root = new TreeItem<>("Layers");
         root.setExpanded(true);
         layers.setRoot(root);
-        Layer layer = new Layer(root);
+        Layer layer = new Layer(root, 0);
         LayersData.getInstance().setCurrentLayer(layer);
         LayersData.getInstance().setRootLayer(layer);
         selectedLayer = root;
@@ -52,8 +51,10 @@ public class LayersController {
         layers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedLayer = newValue;
-                Layer newCurrentLayer = new Layer(selectedLayer);
-                LayersData.getInstance().setCurrentLayer(newCurrentLayer);
+                LayersData.getInstance().addLayerMapping(selectedLayer);
+                Layer mappedLayer = LayersData.getInstance().getLayerForTreeItem(selectedLayer);
+                LayersData.getInstance().setCurrentLayer(mappedLayer);
+                System.out.println(mappedLayer.getLayerNumber());
                 // Add any additional actions or logic here based on the selected node
             }
         });
@@ -94,9 +95,8 @@ public class LayersController {
         // Example of adding a new group
         TreeItem<String> newLayer = new TreeItem<>("New Layer");
         selectedLayer.getChildren().add(newLayer);
-        Layer layer = new Layer(newLayer);
         if (isChildOfRoot(newLayer)){
-            LayersData.getInstance().addLayer(layer);
+            LayersData.getInstance().addLayerMapping(newLayer);
         }
     }
 

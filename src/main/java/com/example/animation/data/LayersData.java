@@ -4,12 +4,18 @@ import com.example.animation.Layer;
 import javafx.scene.control.TreeItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LayersData {
     private static LayersData instance;
     private Layer rootLayer;
     public Layer currentLayer;
+    Integer layerCount = 1;
+
+    Map<TreeItem<String>, Layer> layers = new HashMap<>();
+
 
     private List<CurrentLayerChangeListener> listeners;
 
@@ -34,7 +40,7 @@ public class LayersData {
         return instance;
     }
 
-    public void addLayer(Layer layer){
+    public void addLayer(Layer layer, String ass){
         rootLayers.add(layer);
     }
 
@@ -70,6 +76,19 @@ public class LayersData {
         for (CurrentLayerChangeListener listener : listeners) {
             listener.onCurrentLayerChanged(newLayer);
         }
+    }
+
+    public void addLayerMapping(TreeItem<String> treeItem) {
+        if (!layers.containsKey(treeItem)) {
+            Layer newLayer = new Layer(treeItem, layerCount);
+            layerCount ++;
+            layers.put(treeItem, newLayer);
+        }
+    }
+
+    // Function to get the associated layer for a given TreeItem
+    public Layer getLayerForTreeItem(TreeItem<String> treeItem) {
+        return layers.get(treeItem);
     }
 
 }
