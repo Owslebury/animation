@@ -39,11 +39,6 @@ public class LayersData {
         }
         return instance;
     }
-
-    public void addLayer(Layer layer, String ass){
-        rootLayers.add(layer);
-    }
-
     public Layer getRootLayer() {
         return rootLayer;
     }
